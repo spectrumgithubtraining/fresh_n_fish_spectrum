@@ -10,6 +10,7 @@ import 'package:get/get_core/src/get_main.dart';
 
 import '../Controller/get-user-data-controller.dart';
 import '../Controller/google-sign-in-controller.dart';
+import 'Widget/category-widget.dart';
 import 'Widget/custom-drawer-widget.dart';
 import 'Widget/product-list-widget.dart';
 
@@ -116,28 +117,34 @@ class _MainPageState extends State<MainPage> {
           ),
         ),
         drawer: const DrawerWidget(),
-        body: Container(
-          alignment: Alignment.center,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Padding(
-                padding: EdgeInsets.only(top: 12),
-                child: BannerWidget(),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: GetProductWidget(),
-              ),
-              Center(
-                child: ElevatedButton(
-                    onPressed: () {
-                      _googleSignInController.signOutGoogle();
-                    },
-                    child: const Text("Logout")),
-              ),
-            ],
+        body: SingleChildScrollView(
+          child: Container(
+            alignment: Alignment.center,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(top: 12),
+                  child: BannerWidget(),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: GetProductWidget(),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: CategoryWidget(),
+                ),
+                Center(
+                  child: ElevatedButton(
+                      onPressed: () {
+                        _googleSignInController.signOutGoogle();
+                      },
+                      child: const Text("Logout")),
+                ),
+              ],
+            ),
           ),
         ),
       ),
