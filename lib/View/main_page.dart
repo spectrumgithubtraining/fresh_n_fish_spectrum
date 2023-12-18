@@ -128,12 +128,8 @@ class _MainPageState extends State<MainPage> {
                   padding: EdgeInsets.only(top: 12),
                   child: BannerWidget(),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: GetProductWidget(),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
+                const Padding(
+                  padding: EdgeInsets.all(12.0),
                   child: CategoryWidget(),
                 ),
                 Center(
