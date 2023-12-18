@@ -6,9 +6,7 @@ class CategoryDataController extends GetxController {
 
   Future<List<QueryDocumentSnapshot<Object?>>> getCategoryData() async {
     final QuerySnapshot categoryData =
-    await _firestore
-        .collection('categories')
-        .get();
+        await _firestore.collection('categories').get();
     return categoryData.docs;
   }
 }

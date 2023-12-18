@@ -1,13 +1,13 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fresh_n_fish_spectrum/Models/categories-model.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import '../../Controller/get-category-data-controller.dart';
-import '../../Models/categories-model.dart';
+import '../../Controller/get-product-data-controller.dart';
+
 import '../../Models/product-model.dart';
 
 class CategoryWidget extends StatefulWidget {
@@ -41,60 +41,100 @@ class _CategoryWidgetState extends State<CategoryWidget> {
 
           // Rest of your widget tree using the 'data'
 
-          return ListView.builder(
+          return GridView.builder(
             itemCount: dataLength,
             shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
+            physics: const BouncingScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: 5,
+              crossAxisSpacing: 5,
+              childAspectRatio: 0.80,
+            ),
             itemBuilder: (context, index) {
-              final categoryData = data[index];
-              CategoriesModel categoriesModel = CategoriesModel(
-                categoryId: categoryData['categoryId'],
-                categoryImg: categoryData['categoryImg'],
-                categoryName: categoryData['categoryName'],
-                createdAt: categoryData['createdAt'],
-                updatedAt: categoryData['updatedAt'],
-              );
-              return Padding(
-                padding: EdgeInsets.all(8.0.w),
-                child: GestureDetector(
-                    child: SizedBox(
-                  height: 100.h,
-                  child: Column(
-                    children: [
-                      CircleAvatar(
-                        backgroundColor: const Color(0xFFC0C0C0),
-                        radius: 35.r,
-                        child: CachedNetworkImage(
-                          imageUrl: categoriesModel.categoryImg,
-                          fit: BoxFit.fill,
-                          width: 45.w,
-                          placeholder: (context, url) => const ColoredBox(
-                            color: Colors.white,
-                            child: Center(child: CupertinoActivityIndicator()),
+              final productData = data[index];
+              CategoriesModel categoryModel = CategoriesModel(
+                  categoryId: productData['categoryId'],
+                  categoryImg: productData['categoryImg'],
+                  categoryName: productData['categoryName'],
+                  createdAt: productData['createdAt'],
+                  updatedAt: productData['updatedAt']);
+              return Container(
+                decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.black26,
+                      width: 2.0.w,
+                    ),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15.r),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.grey.withOpacity(.5),
+                          offset: const Offset(3, 2),
+                          blurRadius: 7.r)
+                    ]),
+                child: Column(
+                  children: [
+                    GestureDetector(
+                      onTap: () {},
+                      child: SizedBox(
+                        width: 150.w,
+                        height: 150.h,
+                        child: Padding(
+                          padding: EdgeInsets.all(13.0.w),
+                          child: Image.network(
+                           "${categoryModel.categoryImg}",
+                            width: double.infinity,
                           ),
-                          errorWidget: (context, url, error) =>
-                              const Icon(Icons.error),
                         ),
                       ),
-                      SizedBox(
-                        height: 8.h,
-                      ),
-                      Flexible(
-                        child: Text(
-                          categoriesModel.categoryName,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: const Color(0xFF494949),
-                            fontSize: 14.sp,
+                    ),
+                    Flexible(
+                      child: Text(
+                        "${categoryModel.categoryName}",
+                        style: TextStyle(
+                            color: const Color(0xFF505050),
                             fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w500,
-                            height: 0.h,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10.h,
+                    ),
+                    Flexible(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(left: 13.0.w),
+                            child: Text(
+                              ' ₹ ${categoryModel.categoryName}',
+                              style: TextStyle(
+                                  color: const Color(0xFFCF1919),
+                                  fontFamily: 'Poppins',
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w400),
+                            ),
                           ),
-                        ),
-                      )
-                    ],
-                  ),
-                )),
+                          SizedBox(
+                            width: 30.w,
+                          ),
+                          Flexible(
+                            child: CircleAvatar(
+                              radius: 20.0,
+                              backgroundColor: const Color(0xFF660018),
+                              child: IconButton(
+                                  icon: const Icon(Icons.add_shopping_cart,
+                                      color: Colors.white),
+                                  onPressed: () async {}),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               );
             },
           );

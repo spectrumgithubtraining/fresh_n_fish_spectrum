@@ -87,12 +87,14 @@ class _MainPageState extends State<MainPage> {
 
                 // Rest of your widget tree using the 'data'
 
-                return Text("Hi, ${data.isNotEmpty ? data[0]['username'] : 'N/A'}",style:TextStyle(
-                  color: AppConstant.appTextColor,
-                  fontFamily: 'Roboto-Regular',
-                  fontSize: 15.sp,
-                  height: 0.h,
-                ));
+                return Text(
+                    "Hi, ${data.isNotEmpty ? data[0]['username'] : 'N/A'}",
+                    style: TextStyle(
+                      color: AppConstant.appTextColor,
+                      fontFamily: 'Roboto-Regular',
+                      fontSize: 15.sp,
+                      height: 0.h,
+                    ));
               }
             },
           ),
@@ -131,13 +133,6 @@ class _MainPageState extends State<MainPage> {
                 const Padding(
                   padding: EdgeInsets.all(12.0),
                   child: CategoryWidget(),
-                ),
-                Center(
-                  child: ElevatedButton(
-                      onPressed: () {
-                        _googleSignInController.signOutGoogle();
-                      },
-                      child: const Text("Logout")),
                 ),
               ],
             ),
