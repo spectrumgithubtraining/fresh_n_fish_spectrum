@@ -130,10 +130,7 @@ class _MainPageState extends State<MainPage> {
                   padding: EdgeInsets.only(top: 12),
                   child: BannerWidget(),
                 ),
-                const Padding(
-                  padding: EdgeInsets.all(12.0),
-                  child: CategoryWidget(),
-                ),
+                Container(child: CategoryWidget(),)
               ],
             ),
           ),
