@@ -122,20 +122,20 @@ class _MainPageState extends State<MainPage> {
         body: SingleChildScrollView(
           child: Container(
             alignment: Alignment.center,
-            child: Column(
+            child: const Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Padding(
+                Padding(
                   padding: EdgeInsets.only(top: 12),
                   child: BannerWidget(),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(8.0),
                   child: CategoryWidget(),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(8.0),
                   child: GetProductWidget(),
                 )
               ],
