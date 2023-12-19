@@ -39,112 +39,110 @@ class _GetProductWidgetState extends State<GetProductWidget> {
 
           // Rest of your widget tree using the 'data'
 
-          return Expanded(
-            child: GridView.builder(
-              itemCount: dataLength,
-              shrinkWrap: true,
-              physics: const BouncingScrollPhysics(),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 5,
-                crossAxisSpacing: 5,
-                childAspectRatio: 0.80,
-              ),
-              itemBuilder: (context, index) {
-                final productData = data[index];
-                ProductModel productModel = ProductModel(
-                  productId: productData['productId'],
-                  categoryId: productData['categoryId'],
-                  productName: productData['productName'],
-                  categoryName: productData['categoryName'],
-                  salePrice: productData['salePrice'].toString(),
-                  fullPrice: productData['fullPrice'].toString(),
-                  productImages: productData['productImages'],
-                  deliveryTime: productData['deliveryTime'],
-                  isSale: productData['isSale'],
-                  productDescription: productData['productDescription'],
-                  createdAt: productData['createdAt'],
-                  updatedAt: productData['updatedAt'],
-                );
-                return Container(
-                  decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.black26,
-                        width: 2.0.w,
-                      ),
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(15.r),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.grey.withOpacity(.5),
-                            offset: const Offset(3, 2),
-                            blurRadius: 7.r)
-                      ]),
-                  child: Column(
-                    children: [
-                      GestureDetector(
-                        onTap: () {},
-                        child: SizedBox(
-                          width: 150.w,
-                          height: 150.h,
-                          child: Padding(
-                            padding: EdgeInsets.all(13.0.w),
-                            child: Image.network(
-                              productModel.productImages[0],
-                              width: double.infinity,
-                            ),
+          return GridView.builder(
+            itemCount: dataLength,
+            shrinkWrap: true,
+            physics: const BouncingScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: 5,
+              crossAxisSpacing: 5,
+              childAspectRatio: 0.80,
+            ),
+            itemBuilder: (context, index) {
+              final productData = data[index];
+              ProductModel productModel = ProductModel(
+                productId: productData['productId'],
+                categoryId: productData['categoryId'],
+                productName: productData['productName'],
+                categoryName: productData['categoryName'],
+                salePrice: productData['salePrice'].toString(),
+                fullPrice: productData['fullPrice'].toString(),
+                productImages: productData['productImages'],
+                deliveryTime: productData['deliveryTime'],
+                isSale: productData['isSale'],
+                productDescription: productData['productDescription'],
+                createdAt: productData['createdAt'],
+                updatedAt: productData['updatedAt'],
+              );
+              return Container(
+                decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.black26,
+                      width: 2.0.w,
+                    ),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15.r),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.grey.withOpacity(.5),
+                          offset: const Offset(3, 2),
+                          blurRadius: 7.r)
+                    ]),
+                child: Column(
+                  children: [
+                    GestureDetector(
+                      onTap: () {},
+                      child: SizedBox(
+                        width: 150.w,
+                        height: 150.h,
+                        child: Padding(
+                          padding: EdgeInsets.all(13.0.w),
+                          child: Image.network(
+                            productModel.productImages[0],
+                            width: double.infinity,
                           ),
                         ),
                       ),
-                      Flexible(
-                        child: Text(
-                          "${productModel.productName}",
-                          style: TextStyle(
-                              color: const Color(0xFF505050),
-                              fontFamily: 'Poppins',
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w600),
-                        ),
+                    ),
+                    Flexible(
+                      child: Text(
+                        "${productModel.productName}",
+                        style: TextStyle(
+                            color: const Color(0xFF505050),
+                            fontFamily: 'Poppins',
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w600),
                       ),
-                      SizedBox(
-                        height: 10.h,
-                      ),
-                      Flexible(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(left: 13.0.w),
-                              child: Text(
-                                ' ₹ ${productModel.fullPrice}',
-                                style: TextStyle(
-                                    color: const Color(0xFFCF1919),
-                                    fontFamily: 'Poppins',
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w400),
-                              ),
+                    ),
+                    SizedBox(
+                      height: 10.h,
+                    ),
+                    Flexible(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(left: 13.0.w),
+                            child: Text(
+                              ' ₹ ${productModel.fullPrice}',
+                              style: TextStyle(
+                                  color: const Color(0xFFCF1919),
+                                  fontFamily: 'Poppins',
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w400),
                             ),
-                            SizedBox(
-                              width: 30.w,
+                          ),
+                          SizedBox(
+                            width: 30.w,
+                          ),
+                          Flexible(
+                            child: CircleAvatar(
+                              radius: 20.0,
+                              backgroundColor: const Color(0xFF660018),
+                              child: IconButton(
+                                  icon: const Icon(Icons.add_shopping_cart,
+                                      color: Colors.white),
+                                  onPressed: () async {}),
                             ),
-                            Flexible(
-                              child: CircleAvatar(
-                                radius: 20.0,
-                                backgroundColor: const Color(0xFF660018),
-                                child: IconButton(
-                                    icon: const Icon(Icons.add_shopping_cart,
-                                        color: Colors.white),
-                                    onPressed: () async {}),
-                              ),
-                            )
-                          ],
-                        ),
+                          )
+                        ],
                       ),
-                    ],
-                  ),
-                );
-              },
-            ),
+                    ),
+                  ],
+                ),
+              );
+            },
           );
         }
       },

@@ -43,63 +43,66 @@ class _CategoryWidgetState extends State<CategoryWidget> {
 
           // Rest of your widget tree using the 'data'
 
-          return ListView.builder(
-            itemCount: dataLength,
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) {
-              final productData = data[index];
-              CategoriesModel categoryModel = CategoriesModel(
-                  categoryId: productData['categoryId'],
-                  categoryImg: productData['categoryImg'],
-                  categoryName: productData['categoryName'],
-                  createdAt: productData['createdAt'],
-                  updatedAt: productData['updatedAt']);
-              return Padding(
-                padding: EdgeInsets.all(8.0.w),
-                child: GestureDetector(
-                    onTap: () => null,
-                    child: SizedBox(
-                      height: 100.h,
-                      child: Column(
-                        children: [
-                          CircleAvatar(
-                            backgroundColor: const Color(0xFFC0C0C0),
-                            radius: 35.r,
-                            child: CachedNetworkImage(
-                              imageUrl: categoryModel.categoryImg,
-                              fit: BoxFit.fill,
-                              width: 45.w,
-                              placeholder: (context, url) => const ColoredBox(
-                                color: Colors.white,
-                                child:
-                                    Center(child: CupertinoActivityIndicator()),
-                              ),
-                              errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 8.h,
-                          ),
-                          Flexible(
-                            child: Text(
-                              categoryModel.categoryName,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: const Color(0xFF494949),
-                                fontSize: 14.sp,
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.w500,
-                                height: 0.h,
+          return Container(
+            height: 150,
+            width: Get.width,
+            child: ListView.builder(
+              itemCount: dataLength,
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                final productData = data[index];
+                CategoriesModel categoryModel = CategoriesModel(
+                    categoryId: productData['categoryId'],
+                    categoryImg: productData['categoryImg'],
+                    categoryName: productData['categoryName'],
+                    createdAt: productData['createdAt'],
+                    updatedAt: productData['updatedAt']);
+                return Padding(
+                  padding: EdgeInsets.all(8.0.w),
+                  child: GestureDetector(
+                      onTap: () => null,
+                      child: SizedBox(
+                        height: 100.h,
+                        child: Column(
+                          children: [
+                            CircleAvatar(
+                              backgroundColor: const Color(0xFFC0C0C0),
+                              radius: 35.r,
+                              child: CachedNetworkImage(
+                                imageUrl: categoryModel.categoryImg,
+                                fit: BoxFit.fill,
+                                width: 45.w,
+                                placeholder: (context, url) => const ColoredBox(
+                                  color: Colors.white,
+                                  child:
+                                      Center(child: CupertinoActivityIndicator()),
+                                ),
+                                errorWidget: (context, url, error) =>
+                                    const Icon(Icons.error),
                               ),
                             ),
-                          )
-                        ],
-                      ),
-                    )),
-              );
-            },
+                            SizedBox(
+                              height: 8.h,
+                            ),
+                            Flexible(
+                              child: Text(
+                                categoryModel.categoryName,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: const Color(0xFF494949),
+                                  fontSize: 14.sp,
+                                  fontFamily: 'Roboto-Regular',
+                                  height: 0.h,
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      )),
+                );
+              },
+            ),
           );
         }
       },
