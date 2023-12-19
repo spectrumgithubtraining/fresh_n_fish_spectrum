@@ -1,5 +1,3 @@
-// ignore_for_file: file_names, must_be_immutable, prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers, prefer_interpolation_to_compose_strings, unused_local_variable, avoid_print, prefer_const_declarations, deprecated_member_use
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -209,9 +207,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   static Future<void> sendMessageOnWhatsApp({
     required ProductModel productModel,
   }) async {
-    final number = "+923075812354";
+    final number = "+919400377390";
     final message =
-        "Hello Techi4u \n i want to know about this product \n ${productModel.productName} \n ${productModel.productId}";
+        "Hello Vineeth \n i want to know about this product \n ${productModel.productName} \n ${productModel.productId}";
 
     final url = 'https://wa.me/$number?text=${Uri.encodeComponent(message)}';
 

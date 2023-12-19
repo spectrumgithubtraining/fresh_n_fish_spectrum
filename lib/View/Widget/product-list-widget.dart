@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fresh_n_fish_spectrum/View/Screens/product-deatils-screen.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
@@ -82,7 +83,9 @@ class _GetProductWidgetState extends State<GetProductWidget> {
                 child: Column(
                   children: [
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Get.to(()=>ProductDetailsScreen(productModel: productModel));
+                      },
                       child: SizedBox(
                         width: 150.w,
                         height: 150.h,
