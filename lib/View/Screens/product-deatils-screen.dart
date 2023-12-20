@@ -11,6 +11,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../Models/cart-model.dart';
 import '../../Models/product-model.dart';
 import '../../Utils/app-constant.dart';
+
 class ProductDetailsScreen extends StatefulWidget {
   ProductModel productModel;
   ProductDetailsScreen({super.key, required this.productModel});
@@ -55,21 +56,21 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               items: widget.productModel.productImages
                   .map(
                     (imageUrls) => ClipRRect(
-                  borderRadius: BorderRadius.circular(10.0),
-                  child: CachedNetworkImage(
-                    imageUrl: imageUrls,
-                    fit: BoxFit.cover,
-                    width: Get.width - 10,
-                    placeholder: (context, url) => ColoredBox(
-                      color: Colors.white,
-                      child: Center(
-                        child: CupertinoActivityIndicator(),
+                      borderRadius: BorderRadius.circular(10.0),
+                      child: CachedNetworkImage(
+                        imageUrl: imageUrls,
+                        fit: BoxFit.cover,
+                        width: Get.width - 10,
+                        placeholder: (context, url) => ColoredBox(
+                          color: Colors.white,
+                          child: Center(
+                            child: CupertinoActivityIndicator(),
+                          ),
+                        ),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
                       ),
                     ),
-                    errorWidget: (context, url, error) => Icon(Icons.error),
-                  ),
-                ),
-              )
+                  )
                   .toList(),
               options: CarouselOptions(
                 scrollDirection: Axis.horizontal,
@@ -110,13 +111,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         child: Row(
                           children: [
                             widget.productModel.isSale == true &&
-                                widget.productModel.salePrice != ''
+                                    widget.productModel.salePrice != ''
                                 ? Text(
-                              "INR: " + widget.productModel.salePrice,
-                            )
+                                    "INR: " + widget.productModel.salePrice,
+                                  )
                                 : Text(
-                              "INR: " + widget.productModel.fullPrice,
-                            ),
+                                    "INR: " + widget.productModel.fullPrice,
+                                  ),
                           ],
                         ),
                       ),
@@ -166,7 +167,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 5.0,
                           ),
                           Material(
@@ -219,6 +220,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       throw 'Could not launch $url';
     }
   }
+
   Future<void> checkProductExistence({
     required String uId,
     int quantityIncrement = 1,
@@ -235,8 +237,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       int currentQuantity = snapshot['productQuantity'];
       int updatedQuantity = currentQuantity + quantityIncrement;
       double totalPrice = double.parse(widget.productModel.isSale
-          ? widget.productModel.salePrice
-          : widget.productModel.fullPrice) *
+              ? widget.productModel.salePrice
+              : widget.productModel.fullPrice) *
           updatedQuantity;
 
       await documentReference.update({

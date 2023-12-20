@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fresh_n_fish_spectrum/View/auth_ui/sentopt.dart';
 import 'package:fresh_n_fish_spectrum/View/auth_ui/sign-up-screen.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
@@ -250,11 +251,14 @@ class _SignInState extends State<SignIn> {
                           SizedBox(
                             width: 10.w,
                           ),
-                          SizedBox(
-                            width: 60.w,
-                            height: 44.h,
-                            child: SvgPicture.asset(
-                                'assets/images/ic_sharp-local-phone.svg'),
+                          GestureDetector(
+                            onTap: () => Get.to(()=>SendOtp()),
+                            child: SizedBox(
+                              width: 60.w,
+                              height: 44.h,
+                              child: SvgPicture.asset(
+                                  'assets/images/ic_sharp-local-phone.svg'),
+                            ),
                           ),
                         ]),
                   ),
