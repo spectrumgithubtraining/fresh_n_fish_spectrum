@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fresh_n_fish_spectrum/View/auth_ui/welcome_screen.dart';
 import 'package:get/get.dart';
 
 import '../../Controller/verify-phone-controller.dart';
@@ -18,41 +21,99 @@ class _SendOtpState extends State<SendOtp> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppConstant.appScendoryColor,
-      appBar: AppBar(
-        title: Text("Send Otp"),
-        backgroundColor: Colors.teal,
-      ),
-      body: Container(
-        alignment: Alignment.center,
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Form(
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: AppConstant.appScendoryColor,
+        appBar: AppBar(
+          leading: IconButton(onPressed: () => Get.offAll(() => const WelcomeScreen(),
+              transition: Transition.leftToRightWithFade), icon: Icon(CupertinoIcons.back,color: Colors.white)),
+          centerTitle: true,
+          title:Text("Send OTP", style: TextStyle(
+            color: Colors.white,
+            fontSize: 18.sp,
+            fontFamily: 'Roboto-Bold',
+          )),
+          backgroundColor: Color(0xFF902A2A),
+          elevation: 2,
+        ),
+        body: SingleChildScrollView(
+          child: Container(
+            width: Get.width,
+            height: Get.height,
+            alignment: Alignment.center,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextFormField(
-                      controller: _phoneNumberController,
-                      keyboardType: TextInputType.phone,
-                      decoration: InputDecoration(labelText: "Phone Number"),
+                  Form(
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                                errorStyle: const TextStyle(
+                                  color: Colors.yellow,
+                                  fontSize: null,
+                                  fontWeight: FontWeight.w400,
+                                  fontStyle: FontStyle.normal,
+                                ),
+                                prefixIcon: Icon(Icons.phone),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.r),
+                                  borderSide: const BorderSide(color: Colors.transparent),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.r),
+                                  borderSide: const BorderSide(color: Colors.transparent),
+                                ),
+                                contentPadding:
+                                EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
+                                filled: true,
+                                fillColor: const Color(0xFFF1F4FF),
+                                hintText: "Enter your mobile number",
+                                hintStyle: TextStyle(
+                                  color: Colors.black54,
+                                  fontFamily: 'Roboto-Regular',
+                                  fontSize: 15.sp,
+                                  height: 0.h,
+                                )),
+                            controller: _phoneNumberController,
+                            keyboardType: TextInputType.phone,
+                          ),
+                        ),
+                        SizedBox(height: 16.0),
+                        ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor: const MaterialStatePropertyAll(
+                              AppConstant.btnColor,
+                            ),
+                            overlayColor: MaterialStateProperty.all(
+                                AppConstant.btnColor),
+                            shape: MaterialStatePropertyAll(
+                                RoundedRectangleBorder(
+                                    borderRadius:
+                                    BorderRadius.circular(9.r))),
+                          ),
+                          onPressed: () {
+                            String phoneNumber = "+91" + _phoneNumberController.text.trim();
+                            _sentOtpController.sendOtp(phoneNumber);
+                          },
+                          child: Text("Send OTP", style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18.sp,
+                            fontFamily: 'Roboto-Bold',
+                          )),
+                        ),
+                      ],
                     ),
-                  ),
-                  SizedBox(height: 16.0),
-                  ElevatedButton(
-                    onPressed: () {
-                      String phoneNumber = "+91" + _phoneNumberController.text.trim();
-                      _sentOtpController.sendOtp(phoneNumber);
-                    },
-                    child: Text("Send OTP"),
                   ),
                 ],
               ),
             ),
-          ],
+          ),
         ),
       ),
     );

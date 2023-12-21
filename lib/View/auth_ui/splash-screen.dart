@@ -12,7 +12,6 @@ import '../../Controller/get-user-data-controller.dart';
 import '../../Utils/app-constant.dart';
 import '../main_page.dart';
 
-
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -40,6 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
           transition: Transition.leftToRightWithFade);
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -81,10 +81,10 @@ class _SplashScreenState extends State<SplashScreen> {
                   Text(
                     AppConstant.appPoweredBy,
                     style: TextStyle(
-                        color: AppConstant.appTextColor,
-                        fontFamily: 'Roboto-Bold',
-                        fontSize: 12.0.sp,
-                        ),
+                      color: AppConstant.appTextColor,
+                      fontFamily: 'Roboto-Bold',
+                      fontSize: 12.0.sp,
+                    ),
                   ),
                 ]),
               )
