@@ -1,12 +1,17 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
+import '../Models/user-model.dart';
 import '../View/auth_ui/verifyotp.dart';
 import '../View/main_page.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'get-device-token-controller.dart'; // Import Firestore
 
 class SentOtpController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GetDeviceTokenController getDeviceTokenController =
+  Get.put(GetDeviceTokenController());
 
   void sendOtp(String phoneNumber) async {
     try {
@@ -41,13 +46,46 @@ class SentOtpController extends GetxController {
 
   void verifyOtp(String otp, String verificationId) async {
     try {
-      PhoneAuthCredential credential = PhoneAuthProvider.credential(
-        verificationId: verificationId,
-        smsCode: otp,
+      UserCredential userCredential = await _auth.signInWithCredential(
+        PhoneAuthProvider.credential(
+          verificationId: verificationId,
+          smsCode: otp,
+        ),
       );
 
-      // Sign in the user with the credential
-      await _auth.signInWithCredential(credential);
+      // Extracted user data and corrected the usage of userCredential
+      UserModel userModel = UserModel(
+        uId: userCredential.user!.uid,
+        username: userCredential.user!.displayName ?? '${userCredential.user!.phoneNumber}', // Use an empty string as a fallback
+        email: userCredential.user!.email ?? '${userCredential.user!.phoneNumber}',
+        phone: userCredential.user!.phoneNumber ?? '',
+        userImg: userCredential.user!.photoURL ??
+            'https://firebasestorage.googleapis.com/v0/b/dealninja-2b50b.appspot.com/o/User.png?alt=media&token=b2e7d3ec-7ff6-4567-84b5-d9cee26253f2',
+        userDeviceToken: getDeviceTokenController.deviceToken.toString(),
+        country: '',
+        userAddress: '',
+        street: '',
+        isAdmin: false,
+        isActive: true,
+        createdOn: DateTime.now(),
+        city: '',
+      );
+
+      try {
+        await FirebaseFirestore.instance // Save user data to Firestore
+            .collection('users')
+            .doc(userCredential.user!.uid)
+            .set(userModel.toMap());
+      } catch (error) {
+        print('Error saving user data to Firestore: $error');
+        Get.snackbar(
+          "Error",
+          "$error",
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      }
+
+      Get.snackbar('Success', 'Registration Successful');
 
       // Display success message
       Get.snackbar("Success", "Verification Successful");
