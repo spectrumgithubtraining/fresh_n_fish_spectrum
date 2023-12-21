@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../Controller/verify-phone-controller.dart';
+import '../../Utils/app-constant.dart';
 
 
 class SendOtp extends StatefulWidget {
@@ -18,6 +19,7 @@ class _SendOtpState extends State<SendOtp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppConstant.appScendoryColor,
       appBar: AppBar(
         title: Text("Send Otp"),
         backgroundColor: Colors.teal,
@@ -31,10 +33,13 @@ class _SendOtpState extends State<SendOtp> {
             Form(
               child: Column(
                 children: [
-                  TextFormField(
-                    controller: _phoneNumberController,
-                    keyboardType: TextInputType.phone,
-                    decoration: InputDecoration(labelText: "Phone Number"),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextFormField(
+                      controller: _phoneNumberController,
+                      keyboardType: TextInputType.phone,
+                      decoration: InputDecoration(labelText: "Phone Number"),
+                    ),
                   ),
                   SizedBox(height: 16.0),
                   ElevatedButton(
