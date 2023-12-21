@@ -56,8 +56,8 @@ class SentOtpController extends GetxController {
       // Extracted user data and corrected the usage of userCredential
       UserModel userModel = UserModel(
         uId: userCredential.user!.uid,
-        username: userCredential.user!.displayName ?? '${userCredential.user!.phoneNumber}', // Use an empty string as a fallback
-        email: userCredential.user!.email ?? '${userCredential.user!.phoneNumber}',
+        username: userCredential.user!.displayName ?? 'test user', // Use an empty string as a fallback
+        email: userCredential.user!.email ?? 'testuser@gmail.com',
         phone: userCredential.user!.phoneNumber ?? '',
         userImg: userCredential.user!.photoURL ??
             'https://firebasestorage.googleapis.com/v0/b/dealninja-2b50b.appspot.com/o/User.png?alt=media&token=b2e7d3ec-7ff6-4567-84b5-d9cee26253f2',
