@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fresh_n_fish_spectrum/view/screens/orders-screen.dart';
@@ -42,7 +43,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 return SizedBox(
                     width: 20.w,
                     height: 20.h,
-                    child: Center(child: const CircularProgressIndicator()));
+                    child: Center(child: const CupertinoActivityIndicator()));
               } else if (snapshot.hasError) {
                 // Handle error
                 return Text('Error: ${snapshot.error}');
