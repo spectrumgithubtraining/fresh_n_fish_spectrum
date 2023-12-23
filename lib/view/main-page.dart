@@ -137,19 +137,55 @@ class _MainPageState extends State<MainPage> {
         body: SingleChildScrollView(
           child: Container(
             alignment: Alignment.center,
-            child: const Column(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Trending deals',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: const Color(0xFF494949),
+                      fontSize: 14.sp,
+                      fontFamily: 'Roboto-bold',
+                    ),
+                  ),
+                ),
+                const Padding(
                   padding: EdgeInsets.only(top: 12),
                   child: BannerWidget(),
                 ),
                 Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'All category',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: const Color(0xFF494949),
+                      fontSize: 14.sp,
+                      fontFamily: 'Roboto-bold',
+                    ),
+                  ),
+                ),
+                const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: CategoryWidget(),
                 ),
                 Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'All products',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: const Color(0xFF494949),
+                      fontSize: 14.sp,
+                      fontFamily: 'Roboto-bold',
+                    ),
+                  ),
+                ),
+                const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: GetProductWidget(),
                 )
