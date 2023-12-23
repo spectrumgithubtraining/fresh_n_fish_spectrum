@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fresh_n_fish_spectrum/view/screens/orders-screen.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -9,6 +10,7 @@ import '../../controller/get-user-data-controller.dart';
 import '../../utils/app-constant.dart';
 import '../auth_ui/welcome_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 class DrawerWidget extends StatefulWidget {
   const DrawerWidget({super.key});
 
@@ -18,7 +20,7 @@ class DrawerWidget extends StatefulWidget {
 
 class _DrawerWidgetState extends State<DrawerWidget> {
   final GetUserDataController _getUserDataController =
-  Get.put(GetUserDataController());
+      Get.put(GetUserDataController());
   User? user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
@@ -37,7 +39,10 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 // Return a loading indicator or placeholder widget
-                return SizedBox(width: 20.w,height: 20.h,child: Center(child: const CircularProgressIndicator()));
+                return SizedBox(
+                    width: 20.w,
+                    height: 20.h,
+                    child: Center(child: const CircularProgressIndicator()));
               } else if (snapshot.hasError) {
                 // Handle error
                 return Text('Error: ${snapshot.error}');
@@ -48,25 +53,29 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 // Rest of your widget tree using the 'data'
 
                 return Padding(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 10.0, vertical: 20.0),
                   child: ListTile(
                     titleAlignment: ListTileTitleAlignment.center,
                     title: Text(
                       "${data.isNotEmpty ? data[0]['username'] : 'N/A'}",
-                      style: TextStyle(color: AppConstant.appTextColor, fontFamily: 'Roboto-Regular',
-                        fontSize: 15.sp,),
+                      style: TextStyle(
+                        color: AppConstant.appTextColor,
+                        fontFamily: 'Roboto-Regular',
+                        fontSize: 15.sp,
+                      ),
                     ),
                     subtitle: Text(
                       "${data.isNotEmpty ? data[0]['email'] : 'N/A'}",
-                      style: TextStyle(color: AppConstant.appTextColor,fontFamily: 'Roboto-Regular',
+                      style: TextStyle(
+                          color: AppConstant.appTextColor,
+                          fontFamily: 'Roboto-Regular',
                           fontSize: 10.sp),
                     ),
                     leading: CircleAvatar(
-                      radius: 22.0,
-                      backgroundColor: AppConstant.appMainColor,
-                      child: Image.network("${data[0]['userImg']}")
-                    ),
+                        radius: 22.0,
+                        backgroundColor: AppConstant.appMainColor,
+                        child: Image.network("${data[0]['userImg']}")),
                   ),
                 );
               }
@@ -112,6 +121,9 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 Icons.arrow_forward,
                 color: AppConstant.appTextColor,
               ),
+              onTap: () {
+
+              },
             ),
           ),
           Padding(
@@ -131,7 +143,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 color: AppConstant.appTextColor,
               ),
               onTap: () {
-
+                Get.off(() => OrdersPage());
               },
             ),
           ),

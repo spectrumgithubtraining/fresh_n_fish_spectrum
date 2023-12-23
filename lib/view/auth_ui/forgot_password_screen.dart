@@ -40,8 +40,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 fontSize: 18.sp,
                 fontFamily: 'Roboto-Bold',
               )),
-          backgroundColor: Color(0xFF902A2A),
-          elevation: 2,
+          backgroundColor: AppConstant.appScendoryColor,
+          elevation: 0,
         ),
         body: Container(
           alignment: Alignment.center,
@@ -80,7 +80,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                   horizontal: 16.w, vertical: 20.h),
                               filled: true,
                               fillColor: const Color(0xFFF1F4FF),
-                              hintText: "Enter your mobile number",
+                              hintText: "Enter your email",
                               hintStyle: TextStyle(
                                 color: Colors.black54,
                                 fontFamily: 'Roboto-Regular',
