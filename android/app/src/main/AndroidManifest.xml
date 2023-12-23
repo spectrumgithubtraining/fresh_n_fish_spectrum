@@ -2,7 +2,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <application
-        android:label="fresh_n_fish_spectrum"
+        android:label="Fresh N Fish"
         android:name="${applicationName}"
 
         android:icon="@mipmap/ic_launcher"
