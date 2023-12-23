@@ -14,6 +14,8 @@ import 'package:get/get_core/src/get_main.dart';
 
 import '../controller/get-user-data-controller.dart';
 import '../controller/google-sign-in-controller.dart';
+import '../controller/searchbar-controller.dart';
+import '../services/search-delegate.dart';
 import '../utils/app-constant.dart';
 
 class MainPage extends StatefulWidget {
@@ -25,16 +27,16 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   final GoogleSignInController _googleSignInController =
-      Get.put(GoogleSignInController());
+  Get.put(GoogleSignInController());
   final GetUserDataController _getUserDataController =
-      Get.put(GetUserDataController());
+  Get.put(GetUserDataController());
   User? user = FirebaseAuth.instance.currentUser;
   Widget getTextField(
       {required String hint,
-      required var icons,
-      required var validator,
-      required var controller,
-      required var keyboardType}) {
+        required var icons,
+        required var validator,
+        required var controller,
+        required var keyboardType}) {
     return TextFormField(
       keyboardType: keyboardType,
       validator: validator,
@@ -70,6 +72,7 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+    final SearchBarController searchController = Get.put(SearchBarController());
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -122,12 +125,20 @@ class _MainPageState extends State<MainPage> {
               ),
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: getTextField(
-                  hint: "search",
-                  icons: const Icon(Icons.search),
-                  validator: null,
-                  controller: null,
-                  keyboardType: null,
+                child: GestureDetector(
+                  onTap: () {
+                    showSearch(
+                      context: context,
+                      delegate: CustomSearchDelegate(searchController),
+                    );
+                  },
+                  child: getTextField(
+                    hint: "search",
+                    icons: const Icon(Icons.search),
+                    validator: null,
+                    controller: null,
+                    keyboardType: null,
+                  ),
                 ),
               ),
             ),
