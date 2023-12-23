@@ -34,8 +34,8 @@ class _SendOtpState extends State<SendOtp> {
             fontSize: 18.sp,
             fontFamily: 'Roboto-Bold',
           )),
-          backgroundColor: Color(0xFF902A2A),
-          elevation: 2,
+          backgroundColor: AppConstant.appScendoryColor,
+          elevation: 0,
         ),
         body: SingleChildScrollView(
           child: Container(

@@ -177,29 +177,6 @@ class _SignUpState extends State<SignUp> {
                           SizedBox(
                             height: 15.h,
                           ),
-                          Container(
-                            alignment: Alignment.topRight,
-                            child: TextButton(
-                              onPressed: () {
-                                Get.offAll(() => const ForgotPasswordPage(),
-                                    transition: Transition.leftToRightWithFade);
-                              },
-                              child: Text(
-                                'Forgot your password?',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontFamily: 'Roboto-Regular',
-                                  color: AppConstant.appTextColor,
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w600,
-                                  height: 0.h,
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 15.h,
-                          ),
                           SizedBox(
                               width: 357.w,
                               height: 50.h,

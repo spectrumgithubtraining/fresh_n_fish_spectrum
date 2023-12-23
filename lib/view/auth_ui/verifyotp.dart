@@ -29,8 +29,8 @@ class _VerifyOtpState extends State<VerifyOtp> {
         backgroundColor: AppConstant.appScendoryColor,
         appBar: AppBar(
 
-          backgroundColor: Color(0xFF902A2A),
-          elevation: 2,
+          backgroundColor: AppConstant.appScendoryColor,
+          elevation: 0,
           leading: IconButton(onPressed: () => Get.offAll(() => const SendOtp(),
               transition: Transition.leftToRightWithFade), icon: Icon(CupertinoIcons.back,color: Colors.white)),
           centerTitle: true,
