@@ -1,6 +1,6 @@
 # fresh_n_fish_spectrum
 
-#Hi 👋, I'm Vineeth Venu
+A new Flutter project.
 
 ## Getting Started
 
