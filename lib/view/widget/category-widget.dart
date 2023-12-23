@@ -32,7 +32,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
           return SizedBox(
               width: 20.w,
               height: 20.h,
-              child: const Center(child: CircularProgressIndicator()));
+              child: const Center(child: CupertinoActivityIndicator()));
         } else if (snapshot.hasError) {
           // Handle error
           return Text('Error: ${snapshot.error}');
