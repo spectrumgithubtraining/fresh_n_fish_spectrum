@@ -39,7 +39,7 @@ class _SignUpState extends State<SignUp> {
       required var controller,
       required var keyboardType}) {
     return TextFormField(
-      obscureText: obstxt?.value ?? false,
+      obscureText: obstxt?.value ?? true,
       keyboardType: keyboardType,
       validator: validator,
       controller: controller,

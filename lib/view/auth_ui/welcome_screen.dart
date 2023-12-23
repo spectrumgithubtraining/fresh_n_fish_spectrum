@@ -61,7 +61,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     SizedBox(
                       width: 323.w,
                       child: Text(
-                        'Explore all the existing job roles based on your interest and study major',
+                        'Explore all the existing deals based on your interest and study major',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.white,
