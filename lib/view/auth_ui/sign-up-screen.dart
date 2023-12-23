@@ -7,7 +7,6 @@ import 'package:fresh_n_fish_spectrum/view/auth_ui/welcome_screen.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
-
 import '../../controller/email-sign-in-controller.dart';
 import '../../controller/google-sign-in-controller.dart';
 import '../../services/validator/validator.dart';
@@ -34,7 +33,7 @@ class _SignUpState extends State<SignUp> {
   Widget getTextField(
       {required String hint,
       required var icons,
-        RxBool? obstxt,
+      RxBool? obstxt,
       var suficons,
       required var validator,
       required var controller,
@@ -154,28 +153,30 @@ class _SignUpState extends State<SignUp> {
                             height: 26.h,
                           ),
                           Obx(() => getTextField(
-                            obstxt: _emailPassController.passwordVisible,
-                            suficons: IconButton(
-                              onPressed: () {
-                                _emailPassController.updateVisibility(); // Use the controller method to toggle visibility
-                              },
-                              icon: Icon(_emailPassController.passwordVisible.value
-                                  ? Icons.visibility
-                                  : Icons.visibility_off),
-                            ),
-                            keyboardType: TextInputType.visiblePassword,
-                            hint: "Password",
-                            icons: const Icon(Icons.lock),
-                            validator: (value) => Validator.validatePassword(
-                              password: value,
-                            ),
-                            controller: _passwordTextController,
-                          )),
-
+                                obstxt: _emailPassController.passwordVisible,
+                                suficons: IconButton(
+                                  onPressed: () {
+                                    _emailPassController
+                                        .updateVisibility(); // Use the controller method to toggle visibility
+                                  },
+                                  icon: Icon(
+                                      _emailPassController.passwordVisible.value
+                                          ? Icons.visibility
+                                          : Icons.visibility_off),
+                                ),
+                                keyboardType: TextInputType.visiblePassword,
+                                hint: "Password",
+                                icons: const Icon(Icons.lock),
+                                validator: (value) =>
+                                    Validator.validatePassword(
+                                  password: value,
+                                ),
+                                controller: _passwordTextController,
+                              )),
                           SizedBox(
                             height: 15.h,
                           ),
-                          SizedBox(
+                          Obx(() => SizedBox(
                               width: 357.w,
                               height: 50.h,
                               child: ElevatedButton(
@@ -189,6 +190,7 @@ class _SignUpState extends State<SignUp> {
                                             Color(0xFF1F41BB))),
                                 onPressed: () async {
                                   if (_formKey.currentState!.validate()) {
+                                    _emailPassController.updateLoading();
                                     try {
                                       await _emailPassController.signupUser(
                                         _emailTextController.text,
@@ -210,20 +212,26 @@ class _SignUpState extends State<SignUp> {
                                       }
                                     } catch (e) {
                                       Get.snackbar('Error', e.toString());
+                                    } finally {
+                                      _emailPassController.updateLoading();
                                     }
                                   }
                                 },
-                                child: Text(
-                                  'Sign Up',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: AppConstant.appTextColor,
-                                    fontSize: 20.sp,
-                                    height: 0.h,
-                                    fontFamily: 'Roboto-Bold',
-                                  ),
-                                ),
-                              )),
+                                child: _emailPassController.loading.value
+                                    ? const CircularProgressIndicator(
+                                        color: Colors.white,
+                                      )
+                                    : Text(
+                                        'Sign Up',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          color: AppConstant.appTextColor,
+                                          fontSize: 20.sp,
+                                          height: 0.h,
+                                          fontFamily: 'Roboto-Bold',
+                                        ),
+                                      ),
+                              ))),
                         ],
                       ),
                     ),

@@ -26,8 +26,6 @@ class _SignInState extends State<SignIn> {
   final _formKey = GlobalKey<FormState>();
   final _emailTextController = TextEditingController();
   final _passwordTextController = TextEditingController();
-  bool _loading = false;
-  bool passwordVisible = false;
   get passwordTextController => _passwordTextController;
 
   get emailTextController => _emailTextController;
@@ -37,14 +35,14 @@ class _SignInState extends State<SignIn> {
       Get.put(GoogleSignInController());
   Widget getTextField(
       {required String hint,
-      bool obstxt = false,
+        RxBool? obstxt,
       var suficons,
       required var validator,
       required var icons,
       required var controller,
       required var keyboardType}) {
     return TextFormField(
-      obscureText: obstxt,
+      obscureText: obstxt?.value ?? false,
       keyboardType: keyboardType,
       validator: validator,
       controller: controller,
@@ -150,27 +148,24 @@ class _SignInState extends State<SignIn> {
                               SizedBox(
                                 height: 26.h,
                               ),
-                              getTextField(
-                                  suficons: IconButton(
-                                      onPressed: () {
-                                        setState(
-                                          () {
-                                            passwordVisible = !passwordVisible;
-                                          },
-                                        );
-                                      },
-                                      icon: Icon(passwordVisible
-                                          ? Icons.visibility
-                                          : Icons.visibility_off)),
-                                  obstxt: passwordVisible,
-                                  hint: "Password",
-                                  icons: const Icon(Icons.lock),
-                                  validator: (value) =>
-                                      Validator.validatePassword(
-                                        password: value,
-                                      ),
-                                  controller: _passwordTextController,
-                                  keyboardType: TextInputType.visiblePassword),
+                              Obx(() => getTextField(
+                                obstxt: _emailPassController.passwordVisible,
+                                suficons: IconButton(
+                                  onPressed: () {
+                                    _emailPassController.updateVisibility(); // Use the controller method to toggle visibility
+                                  },
+                                  icon: Icon(_emailPassController.passwordVisible.value
+                                      ? Icons.visibility
+                                      : Icons.visibility_off),
+                                ),
+                                keyboardType: TextInputType.visiblePassword,
+                                hint: "Password",
+                                icons: const Icon(Icons.lock),
+                                validator: (value) => Validator.validatePassword(
+                                  password: value,
+                                ),
+                                controller: _passwordTextController,
+                              )),
                               SizedBox(
                                 height: 15.h,
                               ),
@@ -198,7 +193,7 @@ class _SignInState extends State<SignIn> {
                               SizedBox(
                                 height: 15.h,
                               ),
-                              SizedBox(
+                              Obx(() =>  SizedBox(
                                   width: 357.w,
                                   height: 50.h,
                                   child: ElevatedButton(
@@ -206,20 +201,18 @@ class _SignInState extends State<SignIn> {
                                         shape: MaterialStatePropertyAll(
                                             RoundedRectangleBorder(
                                                 borderRadius:
-                                                    BorderRadius.circular(
-                                                        9.r))),
+                                                BorderRadius.circular(
+                                                    9.r))),
                                         backgroundColor:
-                                            const MaterialStatePropertyAll(
-                                                Color(0xFF1F41BB))),
+                                        const MaterialStatePropertyAll(
+                                            Color(0xFF1F41BB))),
                                     onPressed: () async {
                                       if (_formKey.currentState!.validate()) {
-                                        setState(() {
-                                          _loading = true;
-                                        });
+                                        _emailPassController.updateLoading();
                                         try {
                                           UserCredential? userCredential =
-                                              await _emailPassController
-                                                  .signinUser(
+                                          await _emailPassController
+                                              .signinUser(
                                             _emailTextController.text,
                                             _passwordTextController.text,
                                           );
@@ -233,27 +226,26 @@ class _SignInState extends State<SignIn> {
                                         } catch (e) {
                                           print(e);
                                         } finally {
-                                          setState(() {
-                                            _loading = false;
-                                          });
+                                          _emailPassController.updateLoading();
                                         }
                                       }
                                     },
-                                    child: _loading
+                                    child: _emailPassController.loading.value
                                         ? const CircularProgressIndicator(
-                                            color: Colors.white,
-                                          )
+                                      color: Colors.white,
+                                    )
                                         : Text(
-                                            'Sign in',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              color: AppConstant.appTextColor,
-                                              fontSize: 20.sp,
-                                              height: 0.h,
-                                              fontFamily: 'Roboto-Bold',
-                                            ),
-                                          ),
-                                  )),
+                                      'Sign in',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: AppConstant.appTextColor,
+                                        fontSize: 20.sp,
+                                        height: 0.h,
+                                        fontFamily: 'Roboto-Bold',
+                                      ),
+                                    ),
+                                  )))
+
                             ],
                           ),
                         ),
