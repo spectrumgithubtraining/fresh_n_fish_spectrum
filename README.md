@@ -1,4 +1,4 @@
-# fresh_n_fish_spectrum
+# Fresh N Fish - Spectrum Softtech Solutions
 
 # Hi 👋, I'm Vineeth Venu
 
