@@ -57,7 +57,6 @@ class CustomSearchDelegate extends SearchDelegate<String> {
             final product = searchController.searchResults[index];
             return ListTile(
               title: Text(product.productName),
-              // Add more details or customize the ListTile as needed
             );
           },
         );
