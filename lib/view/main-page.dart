@@ -79,7 +79,7 @@ class _MainPageState extends State<MainPage> {
               child: IconButton(
                   onPressed: () => Get.offAll(() => const CartPage(),
                       transition: Transition.leftToRightWithFade),
-                  icon: Icon(
+                  icon: const Icon(
                     CupertinoIcons.cart,
                     color: Colors.white,
                     size: 30,
