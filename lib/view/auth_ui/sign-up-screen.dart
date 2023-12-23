@@ -31,17 +31,16 @@ class _SignUpState extends State<SignUp> {
       Get.put(GoogleSignInController());
   final EmailPassController _emailPassController =
       Get.put(EmailPassController());
-  bool passwordVisible = false;
   Widget getTextField(
       {required String hint,
       required var icons,
-      bool obstxt = false,
+        RxBool? obstxt,
       var suficons,
       required var validator,
       required var controller,
       required var keyboardType}) {
     return TextFormField(
-      obscureText: obstxt,
+      obscureText: obstxt?.value ?? false,
       keyboardType: keyboardType,
       validator: validator,
       controller: controller,
@@ -154,26 +153,25 @@ class _SignUpState extends State<SignUp> {
                           SizedBox(
                             height: 26.h,
                           ),
-                          getTextField(
-                              obstxt: passwordVisible,
-                              suficons: IconButton(
-                                  onPressed: () {
-                                    setState(
-                                      () {
-                                        passwordVisible = !passwordVisible;
-                                      },
-                                    );
-                                  },
-                                  icon: Icon(passwordVisible
-                                      ? Icons.visibility
-                                      : Icons.visibility_off)),
-                              keyboardType: TextInputType.visiblePassword,
-                              hint: "Password",
-                              icons: const Icon(Icons.lock),
-                              validator: (value) => Validator.validatePassword(
-                                    password: value,
-                                  ),
-                              controller: _passwordTextController),
+                          Obx(() => getTextField(
+                            obstxt: _emailPassController.passwordVisible,
+                            suficons: IconButton(
+                              onPressed: () {
+                                _emailPassController.updateVisibility(); // Use the controller method to toggle visibility
+                              },
+                              icon: Icon(_emailPassController.passwordVisible.value
+                                  ? Icons.visibility
+                                  : Icons.visibility_off),
+                            ),
+                            keyboardType: TextInputType.visiblePassword,
+                            hint: "Password",
+                            icons: const Icon(Icons.lock),
+                            validator: (value) => Validator.validatePassword(
+                              password: value,
+                            ),
+                            controller: _passwordTextController,
+                          )),
+
                           SizedBox(
                             height: 15.h,
                           ),
