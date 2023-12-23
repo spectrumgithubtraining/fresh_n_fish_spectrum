@@ -1,6 +1,17 @@
 # fresh_n_fish_spectrum
 
-A new Flutter project.
+# Hi 👋, I'm Vineeth Venu
+
+A passionate Flutter Developer From India
+    
+    🔭 I’m currently working on Fresh N Fish
+
+    🌱 I’m currently Working Flutter
+
+    💬 Ask me about Flutter
+
+    📫 How to reach me vineethvenu1997@gmail.com
+Project Fresh and Fish revolutionizes seafood with a sustainable, transparent supply chain. Through technology, it ensures responsibly sourced products, educates consumers, and supports local economies for a healthier future for both oceans and communities.
 
 ## Getting Started
 
