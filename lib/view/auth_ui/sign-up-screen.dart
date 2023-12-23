@@ -33,13 +33,13 @@ class _SignUpState extends State<SignUp> {
   Widget getTextField(
       {required String hint,
       required var icons,
-      RxBool? obstxt,
+        bool obstxt = null ?? false,
       var suficons,
       required var validator,
       required var controller,
       required var keyboardType}) {
     return TextFormField(
-      obscureText: obstxt?.value ?? true,
+      obscureText: obstxt,
       keyboardType: keyboardType,
       validator: validator,
       controller: controller,
@@ -79,6 +79,7 @@ class _SignUpState extends State<SignUp> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: AppConstant.appScendoryColor,
+        extendBodyBehindAppBar: true,
         appBar: AppBar(
           backgroundColor: AppConstant.appScendoryColor,
           elevation: 0,
@@ -153,7 +154,7 @@ class _SignUpState extends State<SignUp> {
                             height: 26.h,
                           ),
                           Obx(() => getTextField(
-                                obstxt: _emailPassController.passwordVisible,
+                                obstxt: _emailPassController.passwordVisible.value,
                                 suficons: IconButton(
                                   onPressed: () {
                                     _emailPassController

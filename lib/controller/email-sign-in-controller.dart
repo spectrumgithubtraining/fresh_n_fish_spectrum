@@ -8,7 +8,7 @@ import 'get-device-token-controller.dart';
 
 class EmailPassController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  RxBool passwordVisible = false.obs;
+  RxBool passwordVisible = true.obs;
   RxBool loading = false.obs;
   void updateLoading(){
     loading.toggle();

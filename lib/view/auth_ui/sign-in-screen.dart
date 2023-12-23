@@ -35,14 +35,14 @@ class _SignInState extends State<SignIn> {
       Get.put(GoogleSignInController());
   Widget getTextField(
       {required String hint,
-        RxBool? obstxt,
+        bool obstxt = null ?? false,
       var suficons,
       required var validator,
       required var icons,
       required var controller,
       required var keyboardType}) {
     return TextFormField(
-      obscureText: obstxt?.value ?? true,
+      obscureText: obstxt,
       keyboardType: keyboardType,
       validator: validator,
       controller: controller,
@@ -82,6 +82,7 @@ class _SignInState extends State<SignIn> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: AppConstant.appScendoryColor,
+        extendBodyBehindAppBar: true,
         appBar: AppBar(
           backgroundColor: AppConstant.appScendoryColor,
           elevation: 0,
@@ -149,7 +150,7 @@ class _SignInState extends State<SignIn> {
                                 height: 26.h,
                               ),
                               Obx(() => getTextField(
-                                obstxt: _emailPassController.passwordVisible,
+                                obstxt: _emailPassController.passwordVisible.value,
                                 suficons: IconButton(
                                   onPressed: () {
                                     _emailPassController.updateVisibility(); // Use the controller method to toggle visibility
