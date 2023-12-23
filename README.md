@@ -1,15 +1,6 @@
 # fresh_n_fish_spectrum
-# Hi 👋, I'm Vineeth Venu
 
-
-    🔭 I’m currently working on Fresh N Fish
-
-    🌱 I’m currently Working Flutter
-
-    💬 Ask me about Flutter
-
-    📫 How to reach me vineethvenu1997@gmail.com
-
+#Hi 👋, I'm Vineeth Venu
 
 ## Getting Started
 
