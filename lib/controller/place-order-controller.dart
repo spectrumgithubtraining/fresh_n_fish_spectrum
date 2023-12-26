@@ -18,7 +18,6 @@ class PlaceOrderController extends GetxController {
     required String customerPhone,
     required String customerAddress,
     required String customerDeviceToken,
-    required String transactionRefId
   }) async {
     final user = FirebaseAuth.instance.currentUser;
     EasyLoading.show(status: "Please Wait..");
@@ -58,7 +57,7 @@ class PlaceOrderController extends GetxController {
             customerName: customerName,
             customerPhone: customerPhone,
             customerAddress: customerAddress,
-            customerDeviceToken: customerDeviceToken, transactionRefId: transactionRefId,
+            customerDeviceToken: customerDeviceToken,
 
           );
 
@@ -75,7 +74,6 @@ class PlaceOrderController extends GetxController {
                 'customerDeviceToken': customerDeviceToken,
                 'orderStatus': false,
                 'createdAt': DateTime.now(),
-                'transactionRefId':transactionRefId
               },
             );
 

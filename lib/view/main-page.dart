@@ -15,8 +15,6 @@ import 'package:get/get_core/src/get_main.dart';
 
 import '../controller/get-user-data-controller.dart';
 import '../controller/google-sign-in-controller.dart';
-import '../controller/searchbar-controller.dart';
-import '../services/search-delegate.dart';
 import '../utils/app-constant.dart';
 
 class MainPage extends StatefulWidget {
@@ -34,7 +32,6 @@ class _MainPageState extends State<MainPage> {
   User? user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
-    final SearchBarController searchController = Get.put(SearchBarController());
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(

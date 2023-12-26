@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_swipe_action_cell/core/cell.dart';
-import 'package:fresh_n_fish_spectrum/services/upipage.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
@@ -12,6 +11,7 @@ import '../../controller/cart-price-controller.dart';
 import '../../controller/place-order-controller.dart';
 import '../../models/cart-model.dart';
 import '../../services/get-customer-device-token.dart';
+import '../../services/upi/upi_india.dart';
 import '../../utils/app-constant.dart';
 import '../main-page.dart';
 
@@ -118,7 +118,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                     String totalAmount =
                         productPriceController.totalPrice.value.toString();
                     //place order serice
-                    Get.off(UpiPage(
+                    Get.off(UpiScreen(
                       name: name,
                       phone: phone,
                       address: address,
