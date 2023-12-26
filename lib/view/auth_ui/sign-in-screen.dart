@@ -122,7 +122,7 @@ class _SignInState extends State<SignIn> {
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 14,
-                          fontFamily: 'Poppins',
+                          fontFamily: 'Roboto-Regular',
                           fontWeight: FontWeight.w500,
                         ),
                       ),

@@ -60,9 +60,8 @@ class _CartPageState extends State<CartPage> {
                   builder: (BuildContext context,
                       AsyncSnapshot<QuerySnapshot> snapshot) {
                     if (snapshot.hasError) {
-                      return Center(
-                        child: Text("Error"),
-                      );
+                      return Text("Error",style: TextStyle(
+                          fontSize: 20, fontFamily: 'Roboto-Regular'),);
                     }
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return Container(
@@ -74,8 +73,10 @@ class _CartPageState extends State<CartPage> {
                     }
 
                     if (snapshot.data!.docs.isEmpty) {
-                      return Center(
-                        child: Text("No products found!"),
+                      return const Text(
+                        "No products found!",
+                        style: TextStyle(
+                            fontSize: 20, fontFamily: 'Roboto-Regular'),
                       );
                     }
 
