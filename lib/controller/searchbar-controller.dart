@@ -19,5 +19,6 @@ class SearchBarController extends GetxController {
     searchResults.assignAll(productData.docs
         .map((doc) => ProductModel.fromMap(doc.data() as Map<String, dynamic>))
         .toList());
+    print(searchResults);
   }
 }

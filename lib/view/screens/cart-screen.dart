@@ -252,8 +252,19 @@ class _CartPageState extends State<CartPage> {
                         "Checkout",
                         style: TextStyle(color: AppConstant.appTextColor),
                       ),
-                      onPressed: () {
-                        Get.to(() => CheckoutPage());
+                      onPressed: () async {
+                        if (_productPriceController.totalPrice.value > 0) {
+                          // Navigate to CheckoutPage only if the cart is not empty
+                          Get.to(() => CheckoutPage());
+                        } else {
+                          // Show a message or perform any action when the cart is empty
+                          Get.snackbar(
+                            'Empty Cart',
+                            'Your cart is empty. Add some items to proceed to checkout.',
+                            snackPosition: SnackPosition.BOTTOM,
+                            duration: Duration(seconds: 3),
+                          );
+                        }
                       },
                     ),
                   ),
