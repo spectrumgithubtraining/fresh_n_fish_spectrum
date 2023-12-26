@@ -63,7 +63,7 @@ class _UpiPageState extends State<UpiPage> {
 
     return _upiIndia.startTransaction(
       app: app,
-      receiverUpiId: "9400377390@apl",
+      receiverUpiId: "vineeth.venu.mini@okicici",
       receiverName: 'Vineeth Venu',
       transactionRefId: transactionId,
       transactionNote: 'Fresh N Fish Inc',
@@ -142,7 +142,6 @@ class _UpiPageState extends State<UpiPage> {
           customerPhone: widget.phone,
           customerAddress: widget.address,
           customerDeviceToken: widget.customerToken,
-          transactionRefId: transactionRefId,
         );
         break;
       case UpiPaymentStatus.SUBMITTED:

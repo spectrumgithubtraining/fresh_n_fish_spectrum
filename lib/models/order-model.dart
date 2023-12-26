@@ -19,7 +19,7 @@ class OrderModel {
   final String customerPhone;
   final String customerAddress;
   final String customerDeviceToken;
-  final String transactionRefId;
+
 
   OrderModel({
     required this.productId,
@@ -42,7 +42,7 @@ class OrderModel {
     required this.customerPhone,
     required this.customerAddress,
     required this.customerDeviceToken,
-    required this.transactionRefId,
+
   });
 
   Map<String, dynamic> toMap() {
@@ -67,7 +67,7 @@ class OrderModel {
       'customerPhone': customerPhone,
       'customerAddress': customerAddress,
       'customerDeviceToken': customerDeviceToken,
-      'transactionRefId': transactionRefId
+
     };
   }
 
@@ -93,6 +93,6 @@ class OrderModel {
         customerPhone: json['customerPhone'],
         customerAddress: json['customerAddress'],
         customerDeviceToken: json['customerDeviceToken'],
-        transactionRefId: json['transactionRefId']);
+       );
   }
 }
