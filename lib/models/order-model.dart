@@ -19,6 +19,7 @@ class OrderModel {
   final String customerPhone;
   final String customerAddress;
   final String customerDeviceToken;
+  final String transactionRefId;
 
   OrderModel({
     required this.productId,
@@ -41,6 +42,7 @@ class OrderModel {
     required this.customerPhone,
     required this.customerAddress,
     required this.customerDeviceToken,
+    required this.transactionRefId,
   });
 
   Map<String, dynamic> toMap() {
@@ -65,31 +67,32 @@ class OrderModel {
       'customerPhone': customerPhone,
       'customerAddress': customerAddress,
       'customerDeviceToken': customerDeviceToken,
+      'transactionRefId': transactionRefId
     };
   }
 
   factory OrderModel.fromMap(Map<String, dynamic> json) {
     return OrderModel(
-      productId: json['productId'],
-      categoryId: json['categoryId'],
-      productName: json['productName'],
-      categoryName: json['categoryName'],
-      salePrice: json['salePrice'],
-      fullPrice: json['fullPrice'],
-      productImages: json['productImages'],
-      deliveryTime: json['deliveryTime'],
-      isSale: json['isSale'],
-      productDescription: json['productDescription'],
-      createdAt: json['createdAt'],
-      updatedAt: json['updatedAt'],
-      productQuantity: json['productQuantity'],
-      productTotalPrice: json['productTotalPrice'],
-      customerId: json['customerId'],
-      status: json['status'],
-      customerName: json['customerName'],
-      customerPhone: json['customerPhone'],
-      customerAddress: json['customerAddress'],
-      customerDeviceToken: json['customerDeviceToken'],
-    );
+        productId: json['productId'],
+        categoryId: json['categoryId'],
+        productName: json['productName'],
+        categoryName: json['categoryName'],
+        salePrice: json['salePrice'],
+        fullPrice: json['fullPrice'],
+        productImages: json['productImages'],
+        deliveryTime: json['deliveryTime'],
+        isSale: json['isSale'],
+        productDescription: json['productDescription'],
+        createdAt: json['createdAt'],
+        updatedAt: json['updatedAt'],
+        productQuantity: json['productQuantity'],
+        productTotalPrice: json['productTotalPrice'],
+        customerId: json['customerId'],
+        status: json['status'],
+        customerName: json['customerName'],
+        customerPhone: json['customerPhone'],
+        customerAddress: json['customerAddress'],
+        customerDeviceToken: json['customerDeviceToken'],
+        transactionRefId: json['transactionRefId']);
   }
 }

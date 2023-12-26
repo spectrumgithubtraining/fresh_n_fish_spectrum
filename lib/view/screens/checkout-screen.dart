@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_swipe_action_cell/core/cell.dart';
+import 'package:fresh_n_fish_spectrum/services/upipage.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
@@ -25,8 +26,6 @@ class _CheckoutPageState extends State<CheckoutPage> {
   User? user = FirebaseAuth.instance.currentUser;
   final ProductPriceController productPriceController =
       Get.put(ProductPriceController());
-  final PlaceOrderController _placeOrderController =
-  Get.put(PlaceOrderController());
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController addressController = TextEditingController();
@@ -115,16 +114,17 @@ class _CheckoutPageState extends State<CheckoutPage> {
                     String phone = phoneController.text.trim();
                     String address = addressController.text.trim();
                     String customerToken = await getCustomerDeviceToken();
-
+// Get the total price from the controller
+                    String totalAmount =
+                        productPriceController.totalPrice.value.toString();
                     //place order serice
-
-                    _placeOrderController.placeOrder(
-                      context: context,
-                      customerName: name,
-                      customerPhone: phone,
-                      customerAddress: address,
-                      customerDeviceToken: customerToken,
-                    );
+                    Get.off(UpiPage(
+                      name: name,
+                      phone: phone,
+                      address: address,
+                      customerToken: customerToken,
+                      totalAmount: totalAmount,
+                    ));
                   } else {
                     print("Fill The Details");
                   }

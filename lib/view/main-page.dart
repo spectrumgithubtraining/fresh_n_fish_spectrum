@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:fresh_n_fish_spectrum/view/screens/cart-screen.dart';
+import 'package:fresh_n_fish_spectrum/view/search-bar/user-serach-delegate.dart';
 import 'package:fresh_n_fish_spectrum/view/widget/banner-widget.dart';
 import 'package:fresh_n_fish_spectrum/view/widget/category-widget.dart';
 import 'package:fresh_n_fish_spectrum/view/widget/custom-drawer-widget.dart';
@@ -31,45 +32,6 @@ class _MainPageState extends State<MainPage> {
   final GetUserDataController _getUserDataController =
       Get.put(GetUserDataController());
   User? user = FirebaseAuth.instance.currentUser;
-  Widget getTextField(
-      {required String hint,
-      required var icons,
-      required var validator,
-      required var controller,
-      required var keyboardType}) {
-    return TextFormField(
-      keyboardType: keyboardType,
-      validator: validator,
-      controller: controller,
-      decoration: InputDecoration(
-          errorStyle: const TextStyle(
-            color: Colors.yellow,
-            fontSize: null,
-            fontWeight: FontWeight.w400,
-            fontStyle: FontStyle.normal,
-          ),
-          prefixIcon: icons,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.r),
-            borderSide: const BorderSide(color: Colors.transparent),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.r),
-            borderSide: const BorderSide(color: Colors.transparent),
-          ),
-          contentPadding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 13.h),
-          filled: true,
-          fillColor: const Color(0xFFF1F4FF),
-          hintText: hint,
-          hintStyle: TextStyle(
-            color: Colors.black54,
-            fontFamily: 'Roboto-Regular',
-            fontSize: 15.sp,
-            height: 0.h,
-          )),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final SearchBarController searchController = Get.put(SearchBarController());
@@ -125,17 +87,33 @@ class _MainPageState extends State<MainPage> {
               ),
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: getTextField(
-                  hint: "search",
-                  icons: GestureDetector(
-                      onTap: () => showSearch(
-                            context: context,
-                            delegate: CustomSearchDelegate(searchController),
-                          ),
-                      child: const Icon(Icons.search)),
-                  validator: null,
-                  controller: null,
-                  keyboardType: null,
+                child: GestureDetector(
+                  onTap: () =>  showSearch(context: context, delegate: UserSearch()),
+                  child: Container(
+
+                    alignment: Alignment.center,
+                    height: 50,
+                    width: Get.width * 0.9,
+                    color: Colors.white,
+                    child: Row(children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Icon(
+                          CupertinoIcons.search,
+                          color: Colors.black54,
+                        ),
+                      ),
+                      Text(
+                        "Search",
+                        style: TextStyle(
+                          color: Colors.black54,
+                          fontFamily: 'Roboto-Regular',
+                          fontSize: 15.sp,
+                          height: 0.h,
+                        ),
+                      ),
+                    ]),
+                  ),
                 ),
               ),
             ),
