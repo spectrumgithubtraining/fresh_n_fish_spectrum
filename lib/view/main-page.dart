@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:fresh_n_fish_spectrum/view/screens/cart-screen.dart';
+import 'package:fresh_n_fish_spectrum/view/screens/favourite_screen.dart';
 import 'package:fresh_n_fish_spectrum/view/search-bar/user-serach-delegate.dart';
 import 'package:fresh_n_fish_spectrum/view/widget/banner-widget.dart';
 import 'package:fresh_n_fish_spectrum/view/widget/category-widget.dart';
@@ -36,8 +37,19 @@ class _MainPageState extends State<MainPage> {
       child: Scaffold(
         appBar: AppBar(
           actions: [
+
             Padding(
               padding: const EdgeInsets.only(right: 15),
+              child: IconButton(
+                  onPressed: () => Get.offAll(() => const FavouriteScreen(),
+                      transition: Transition.leftToRightWithFade),
+                  icon: const Icon(
+                    Icons.favorite,
+                    color: Colors.white,
+                    size: 30,
+                  )),
+            ),Padding(
+              padding: const EdgeInsets.only(right: 8),
               child: IconButton(
                   onPressed: () => Get.offAll(() => const CartPage(),
                       transition: Transition.leftToRightWithFade),

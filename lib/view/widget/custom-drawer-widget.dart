@@ -12,6 +12,7 @@ import '../../controller/get-user-data-controller.dart';
 import '../../controller/get-whatsappmsg-controller.dart';
 import '../../utils/app-constant.dart';
 import '../auth_ui/welcome_screen.dart';
+import 'contact-us.dart';
 
 
 class DrawerWidget extends StatefulWidget {
@@ -171,6 +172,9 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 Icons.arrow_forward,
                 color: AppConstant.appTextColor,
               ),
+              onTap: () {
+                ContactUsDialog.showContactUsDialog(context);
+              },
             ),
           ),
           Padding(
