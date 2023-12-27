@@ -1,23 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:fresh_n_fish_spectrum/view/screens/checkout-screen.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:upi_india/upi_india.dart';
-import 'package:upi_india/upi_response.dart';
 
 import '../../controller/place-order-controller.dart';
 
 class UpiScreen extends StatefulWidget {
-  final String name, phone, address, customerToken, totalAmount;
-
-  const UpiScreen({
-    Key? key,
-    required this.name,
-    required this.phone,
-    required this.address,
-    required this.customerToken,
-    required this.totalAmount,
-  }) : super(key: key);
-
+  late String name, phone, address, customerToken, totalAmount;
+  UpiScreen(
+      {super.key,
+      required this.name,
+      required this.phone,
+      required this.address,
+      required this.customerToken,
+      required this.totalAmount});
   @override
   _UpiScreenState createState() => _UpiScreenState();
 }
@@ -52,13 +49,14 @@ class _UpiScreenState extends State<UpiScreen> {
   }
 
   Future<UpiResponse> initiateTransaction(UpiApp app) async {
+    double amount = double.parse(widget.totalAmount);
     return _upiIndia.startTransaction(
       app: app,
       receiverUpiId: "vineeth.venu.mini@okicici",
-      receiverName: 'Vineeth venu',
+      receiverName: 'Vineeth Venu',
       transactionRefId: 'TestingUpiIndiaPlugin',
       transactionNote: 'Not actual. Just an example.',
-      amount: double.parse(widget.totalAmount),
+      amount: amount,
     );
   }
 
@@ -85,7 +83,7 @@ class _UpiScreenState extends State<UpiScreen> {
                   setState(() {});
                 },
                 child: Container(
-                  height: 100,
+                  height: 200,
                   width: 100,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -126,18 +124,18 @@ class _UpiScreenState extends State<UpiScreen> {
     switch (status) {
       case UpiPaymentStatus.SUCCESS:
         _placeOrderController.placeOrder(
-          context: context,
-          customerName: widget.name,
-          customerPhone: widget.phone,
-          customerAddress: widget.address,
-          customerDeviceToken: widget.customerToken,
-        );
+            context: context,
+            customerName: widget.name,
+            customerPhone: widget.phone,
+            customerAddress: widget.address,
+            customerDeviceToken: widget.customerToken);
         print('Transaction Successful');
         break;
       case UpiPaymentStatus.SUBMITTED:
         print('Transaction Submitted');
         break;
       case UpiPaymentStatus.FAILURE:
+        Get.off(()=>CheckoutPage());
         print('Transaction Failed');
         break;
       default:
@@ -166,9 +164,7 @@ class _UpiScreenState extends State<UpiScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFF1F41BB),
         title: Text('UPI'),
-        centerTitle: true,
       ),
       body: Column(
         children: <Widget>[
