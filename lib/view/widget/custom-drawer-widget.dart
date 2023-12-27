@@ -3,11 +3,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fresh_n_fish_spectrum/view/main-page.dart';
 import 'package:fresh_n_fish_spectrum/view/screens/orders-screen.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../controller/get-user-data-controller.dart';
+import '../../controller/get-whatsappmsg-controller.dart';
 import '../../utils/app-constant.dart';
 import '../auth_ui/welcome_screen.dart';
 
@@ -22,6 +24,7 @@ class DrawerWidget extends StatefulWidget {
 class _DrawerWidgetState extends State<DrawerWidget> {
   final GetUserDataController _getUserDataController =
       Get.put(GetUserDataController());
+  final GetWhatsappMsg _getWhatsappMsg = Get.put(GetWhatsappMsg());
   User? user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
@@ -104,6 +107,10 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 Icons.arrow_forward,
                 color: AppConstant.appTextColor,
               ),
+              onTap: () {
+                Get.off(() => MainPage());
+                Navigator.of(context).pop();
+              },
             ),
           ),
           Padding(
@@ -111,11 +118,11 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             child: ListTile(
               titleAlignment: ListTileTitleAlignment.center,
               title: Text(
-                "Products",
+                "Message",
                 style: TextStyle(color: AppConstant.appTextColor),
               ),
               leading: Icon(
-                Icons.production_quantity_limits,
+                Icons.message,
                 color: AppConstant.appTextColor,
               ),
               trailing: Icon(
@@ -123,7 +130,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 color: AppConstant.appTextColor,
               ),
               onTap: () {
-
+                _getWhatsappMsg.sendWhatsappMsg();
               },
             ),
           ),

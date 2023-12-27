@@ -185,7 +185,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                   onPressed: (){
                                     _getWhatsappMsg.sendMessageOnWhatsApp(productModel: widget.productModel);
                                   },
-                                  child:  Text(
+                                  child:  const Text(
                                     'Whatsapp',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
