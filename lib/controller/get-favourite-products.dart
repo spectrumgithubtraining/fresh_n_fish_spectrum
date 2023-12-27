@@ -5,7 +5,7 @@ import '../models/favorite_model.dart';
 import '../models/product-model.dart';
 
 class FavouriteProduct extends GetxController {
-  Future<void> checkProductExistence(
+  Future<void> checkFavouriteItemExistence(
       {required String uId,
       int quantityIncrement = 1,
       required ProductModel productModel}) async {
