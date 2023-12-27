@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../controller/get-cart-product-controller.dart';
+import '../../controller/get-favourite-products.dart';
 import '../../controller/get-whatsappmsg-controller.dart';
 import '../../models/product-model.dart';
 
@@ -24,6 +25,7 @@ class ProductDetailsScreen extends StatefulWidget {
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   User? user = FirebaseAuth.instance.currentUser;
   final CartItemController _CartItemController = Get.put(CartItemController());
+  final FavouriteProduct _favouriteProduct= Get.put(FavouriteProduct());
   final GetWhatsappMsg _getWhatsappMsg = Get.put(GetWhatsappMsg());
   @override
   Widget build(BuildContext context) {
@@ -108,7 +110,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                     fontSize: 18.sp,
                                     fontFamily: 'Roboto-Bold',
                                   )),
-                              const Icon(Icons.favorite_outline)
+                              InkWell(onTap: () async {
+                                print("Clicked");
+                                await _favouriteProduct
+                                    .checkFavouriteItemExistence(
+                                    uId: user!.uid,
+                                    productModel: widget.productModel);
+                              },child: Icon(Icons.favorite_outline))
                             ],
                           ),
                         ),
