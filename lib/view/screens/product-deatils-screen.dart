@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../controller/get-cart-product-controller.dart';
+import '../../controller/get-whatsappmsg-controller.dart';
 import '../../models/product-model.dart';
 
 import '../../utils/app-constant.dart';
@@ -23,6 +24,7 @@ class ProductDetailsScreen extends StatefulWidget {
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   User? user = FirebaseAuth.instance.currentUser;
   final CartItemController _CartItemController = Get.put(CartItemController());
+  final GetWhatsappMsg _getWhatsappMsg = Get.put(GetWhatsappMsg());
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -185,7 +187,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                         fontFamily: 'Roboto-Regular',
                                       )),
                                   onPressed: () {
-                                    return null;
+                                    _getWhatsappMsg.sendMessageOnWhatsApp(productModel: widget.productModel);
                                   },
                                 ),
                               ),
