@@ -171,54 +171,55 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Material(
-                              child: Container(
+                            SizedBox(
                                 width: Get.width / 3.0,
                                 height: Get.height / 16,
-                                decoration: BoxDecoration(
-                                  color: AppConstant.appScendoryColor,
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
-                                child: TextButton(
-                                  child: Text("WhatsApp",
-                                      style: TextStyle(
-                                        color: AppConstant.appTextColor,
-                                        fontSize: 13.sp,
-                                        fontFamily: 'Roboto-Regular',
-                                      )),
-                                  onPressed: () {
+                                child: ElevatedButton(
+                                  style: ButtonStyle(
+                                      shape: MaterialStatePropertyAll(
+                                          RoundedRectangleBorder(
+                                              borderRadius:
+                                              BorderRadius.circular(9.r))),
+                                      backgroundColor: const MaterialStatePropertyAll(
+                                          AppConstant.appScendoryColor)),
+                                  onPressed: (){
                                     _getWhatsappMsg.sendMessageOnWhatsApp(productModel: widget.productModel);
                                   },
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 5.0,
-                            ),
-                            Material(
-                              child: Container(
-                                width: Get.width / 3.0,
-                                height: Get.height / 16,
-                                decoration: BoxDecoration(
-                                  color: AppConstant.appScendoryColor,
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
-                                child: TextButton(
-                                  child: const Text(
-                                    "Add to cart",
+                                  child:  Text(
+                                    'Whatsapp',
+                                    textAlign: TextAlign.center,
                                     style: TextStyle(
+                                      fontFamily: 'Roboto-Regular',
                                         color: AppConstant.appTextColor),
                                   ),
+                                )),
+                            const SizedBox(
+                              width: 15.0,
+                            ),SizedBox(
+                                width: Get.width / 3.0,
+                                height: Get.height / 16,
+                                child: ElevatedButton(
+                                  style: ButtonStyle(
+                                      shape: MaterialStatePropertyAll(
+                                          RoundedRectangleBorder(
+                                              borderRadius:
+                                              BorderRadius.circular(9.r))),
+                                      backgroundColor: const MaterialStatePropertyAll(
+                                          AppConstant.appScendoryColor)),
                                   onPressed: () async {
-                                    // Get.to(() => SignInScreen());
                                     await _CartItemController
                                         .checkProductExistence(
-                                            uId: user!.uid,
-                                            productModel: widget.productModel);
+                                        uId: user!.uid,
+                                        productModel: widget.productModel);
                                   },
-                                ),
-                              ),
-                            ),
+                                  child:  Text(
+                                    'Add to cart',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontFamily: 'Roboto-Regular',
+                                        color: AppConstant.appTextColor),
+                                  ),
+                                )),
                           ],
                         ),
                       )
