@@ -5,6 +5,10 @@ import '../models/favorite_model.dart';
 import '../models/product-model.dart';
 
 class FavouriteProduct extends GetxController {
+  RxBool loading = false.obs;
+  void updateLoading(){
+    loading.toggle();
+  }
   Future<void> checkFavouriteItemExistence(
       {required String uId,
       int quantityIncrement = 1,

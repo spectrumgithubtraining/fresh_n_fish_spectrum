@@ -22,7 +22,6 @@ class FavouriteScreen extends StatefulWidget {
 class _FavouriteScreenState extends State<FavouriteScreen> {
   @override
   Widget build(BuildContext context) {
-    final FavouriteProduct favouriteProduct = Get.put(FavouriteProduct());
     User? user = FirebaseAuth.instance.currentUser;
     return SafeArea(
       child: Scaffold(

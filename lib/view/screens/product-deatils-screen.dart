@@ -25,7 +25,7 @@ class ProductDetailsScreen extends StatefulWidget {
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   User? user = FirebaseAuth.instance.currentUser;
   final CartItemController _CartItemController = Get.put(CartItemController());
-  final FavouriteProduct _favouriteProduct= Get.put(FavouriteProduct());
+  final FavouriteProduct _favouriteProduct = Get.put(FavouriteProduct());
   final GetWhatsappMsg _getWhatsappMsg = Get.put(GetWhatsappMsg());
   @override
   Widget build(BuildContext context) {
@@ -110,13 +110,21 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                     fontSize: 18.sp,
                                     fontFamily: 'Roboto-Bold',
                                   )),
-                              InkWell(onTap: () async {
-                                print("Clicked");
-                                await _favouriteProduct
-                                    .checkFavouriteItemExistence(
-                                    uId: user!.uid,
-                                    productModel: widget.productModel);
-                              },child: Icon(Icons.favorite_outline))
+                              InkWell(
+                                  onTap: () async {
+                                    _favouriteProduct.updateLoading();
+                                    await _favouriteProduct
+                                        .checkFavouriteItemExistence(
+                                            uId: user!.uid,
+                                            productModel: widget.productModel);
+                                    _favouriteProduct.updateLoading();
+                                  },
+                                  child: _favouriteProduct.loading.value
+                                      ? Icon(Icons.favorite)
+                                      : Icon(
+                                          Icons.favorite,
+                                          color: Colors.red,
+                                        ))
                             ],
                           ),
                         ),
@@ -187,23 +195,26 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                       shape: MaterialStatePropertyAll(
                                           RoundedRectangleBorder(
                                               borderRadius:
-                                              BorderRadius.circular(9.r))),
-                                      backgroundColor: const MaterialStatePropertyAll(
-                                          AppConstant.appScendoryColor)),
-                                  onPressed: (){
-                                    _getWhatsappMsg.sendMessageOnWhatsApp(productModel: widget.productModel);
+                                                  BorderRadius.circular(9.r))),
+                                      backgroundColor:
+                                          const MaterialStatePropertyAll(
+                                              AppConstant.appScendoryColor)),
+                                  onPressed: () {
+                                    _getWhatsappMsg.sendMessageOnWhatsApp(
+                                        productModel: widget.productModel);
                                   },
-                                  child:  const Text(
+                                  child: const Text(
                                     'Whatsapp',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
-                                      fontFamily: 'Roboto-Regular',
+                                        fontFamily: 'Roboto-Regular',
                                         color: AppConstant.appTextColor),
                                   ),
                                 )),
                             const SizedBox(
                               width: 15.0,
-                            ),SizedBox(
+                            ),
+                            SizedBox(
                                 width: Get.width / 3.0,
                                 height: Get.height / 16,
                                 child: ElevatedButton(
@@ -211,16 +222,17 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                       shape: MaterialStatePropertyAll(
                                           RoundedRectangleBorder(
                                               borderRadius:
-                                              BorderRadius.circular(9.r))),
-                                      backgroundColor: const MaterialStatePropertyAll(
-                                          AppConstant.appScendoryColor)),
+                                                  BorderRadius.circular(9.r))),
+                                      backgroundColor:
+                                          const MaterialStatePropertyAll(
+                                              AppConstant.appScendoryColor)),
                                   onPressed: () async {
                                     await _CartItemController
                                         .checkProductExistence(
-                                        uId: user!.uid,
-                                        productModel: widget.productModel);
+                                            uId: user!.uid,
+                                            productModel: widget.productModel);
                                   },
-                                  child:  Text(
+                                  child: Text(
                                     'Add to cart',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
